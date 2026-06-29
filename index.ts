@@ -14,12 +14,15 @@ const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://expense-tracker-client-taupe.vercel.app'  // add your actual frontend URL
+    'https://expense-tracker-client-taupe.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+app.options('*', cors());  // handle preflight
+app.use(express.json());
 
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
