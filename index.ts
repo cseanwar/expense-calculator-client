@@ -22,7 +22,7 @@ const corsOptions: CorsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options('/(.*)', cors(corsOptions));
 app.use(express.json());
 
 const client = new MongoClient(uri, {
