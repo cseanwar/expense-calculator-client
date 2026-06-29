@@ -12,12 +12,14 @@ const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 // app.use(cors());
 // Replace your old app.use(cors()) with this:
 app.use(cors({
-  origin: 'http://localhost:3000', // Allows your Next.js app to talk to the backend
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Explicitly handles preflight methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allows the headers your browser is requesting
+  origin: [
+    'http://localhost:3000',
+    'https://expense-calculator-client.vercel.app'  // add your actual frontend URL
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-app.use(express.json());
 
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -42,9 +44,9 @@ async function run() {
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    app.listen(port, () => {
-      console.log(`SpendWise app listening on port ${port}`);
-    });
+    // app.listen(port, () => {
+    //   console.log(`SpendWise app listening on port ${port}`);
+    // });
 
   } catch (error) {
     console.log('Failed to connect the database:', error);
@@ -139,3 +141,4 @@ app.delete('/api/expense/:id', async (req: Request, res: Response): Promise<any>
 });
 
 run();
+export default app;
