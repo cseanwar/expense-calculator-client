@@ -14,7 +14,7 @@ const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://expense-calculator-client.vercel.app'  // add your actual frontend URL
+    'https://expense-tracker-client-taupe.vercel.app'  // add your actual frontend URL
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
